@@ -1,0 +1,4 @@
+body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+.question { padding: 1rem; border-radius: .5rem; background: #f8f9fa; margin-bottom: .5rem; }
+.option { cursor: pointer; }
+.option.active { background: #e9f7ef; }
