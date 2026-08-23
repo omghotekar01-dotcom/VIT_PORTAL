@@ -37,5 +37,8 @@ mongoose.connect(MONGODB_URI)
     });
   })
   .catch((err) => {
-    console.error('MongoDB connection error:', err);
+    console.warn('MongoDB connection failed; starting server without database:', err.message || err);
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT} (without MongoDB)`);
+    });
   });

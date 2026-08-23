@@ -8,6 +8,19 @@ import { GraduationCap, Lock, Mail, ArrowRight, Loader2, Hash, AlertCircle } fro
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'
 
+const demoStudents = [
+  { email: 'nupur.1251030483@vit.edu', prn: '1251030483', name: 'Nupur Dharmesh Agrawal' },
+  { email: 'om.1251030402@vit.edu', prn: '1251030402', name: 'Om Manish Patil' },
+  { email: 'om.1251030180@vit.edu', prn: '1251030180', name: 'Om Nivrutti Ghotekar' },
+  { email: 'nandkishor.1251030142@vit.edu', prn: '1251030142', name: 'Nandkishor Shantiling Pachbhai' }
+]
+
+const demoUsers = [
+  { email: 'faculty@vit.edu', password: 'faculty', role: 'faculty', name: 'Faculty Demo User' },
+  { email: 'dean@vit.edu', password: 'dean', role: 'admin', name: 'Dean Demo User' },
+  { email: 'tpo@vit.edu', password: 'tpo', role: 'tpo', name: 'TPO Demo User' }
+]
+
 export default function LoginForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -33,6 +46,26 @@ export default function LoginForm() {
       const data = await res.json()
 
       if (!res.ok) {
+        // Fallback: accept demo credentials locally when backend returns an error
+        if (role === 'student') {
+          const found = demoStudents.find(d => d.email.toLowerCase() === String(email).trim().toLowerCase() && d.prn === String(password).trim())
+          if (found) {
+            localStorage.setItem('token', 'demo-token')
+            localStorage.setItem('user', JSON.stringify({ name: found.name, email: found.email, role: 'student' }))
+            router.push('/student/dashboard')
+            setLoading(false)
+            return
+          }
+        } else {
+          const found = demoUsers.find(d => d.email.toLowerCase() === String(email).trim().toLowerCase() && d.password === String(password).trim() && d.role === role)
+          if (found) {
+            localStorage.setItem('token', 'demo-token')
+            localStorage.setItem('user', JSON.stringify({ name: found.name, email: found.email, role: found.role }))
+            router.push(`/${found.role}/dashboard`)
+            setLoading(false)
+            return
+          }
+        }
         setError(data.message || 'Login failed')
         setLoading(false)
         return
@@ -44,14 +77,31 @@ export default function LoginForm() {
       router.push(`/${data.user.role}/dashboard`)
     } catch (err) {
       console.warn('Backend not available, using demo mode')
-      localStorage.setItem('user', JSON.stringify({ name: 'Demo User', email, role }))
-      router.push(`/${role}/dashboard`)
+      if (role === 'student') {
+        const found = demoStudents.find(d => d.email.toLowerCase() === String(email).trim().toLowerCase() && d.prn === String(password).trim())
+        if (found) {
+          localStorage.setItem('token', 'demo-token')
+          localStorage.setItem('user', JSON.stringify({ name: found.name, email: found.email, role: 'student' }))
+          router.push('/student/dashboard')
+          return
+        }
+      } else {
+        const found = demoUsers.find(d => d.email.toLowerCase() === String(email).trim().toLowerCase() && d.password === String(password).trim() && d.role === role)
+        if (found) {
+          localStorage.setItem('token', 'demo-token')
+          localStorage.setItem('user', JSON.stringify({ name: found.name, email: found.email, role: found.role }))
+          router.push(`/${found.role}/dashboard`)
+          return
+        }
+      }
+      setError('Backend unavailable. Use demo credentials or start the API server.')
     } finally {
       setLoading(false)
     }
   }
 
   const isStudent = role === 'student'
+  const portalName = role === 'admin' ? 'Dean' : role === 'faculty' ? 'Faculty' : role === 'tpo' ? 'TPO' : 'Student'
 
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background p-6">
@@ -74,7 +124,7 @@ export default function LoginForm() {
               />
             </div>
             <div className="text-center space-y-2">
-              <h2 className="text-3xl md:text-4xl font-black text-foreground capitalize tracking-tight">{role} Portal</h2>
+              <h2 className="text-3xl md:text-4xl font-black text-foreground capitalize tracking-tight">{portalName} Portal</h2>
               <p className="text-muted-foreground font-medium text-sm md:text-lg">
                 {isStudent ? 'Use your college email & PRN number to login.' : 'Enter your institutional credentials.'}
               </p>
@@ -98,7 +148,7 @@ export default function LoginForm() {
                 <input 
                   type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
                   className="w-full bg-secondary border border-transparent rounded-2xl py-4 pl-16 pr-6 text-foreground placeholder:text-muted-foreground focus:outline-none focus:bg-background focus:border-primary/20 focus:ring-4 focus:ring-primary/5 transition-all text-base font-bold shadow-sm"
-                  placeholder={isStudent ? 'name@vit.edu' : 'admin@vit.edu'}
+                  placeholder={isStudent ? 'name@vit.edu' : role === 'admin' ? 'dean@vit.edu' : role === 'faculty' ? 'faculty@vit.edu' : 'tpo@vit.edu'}
                 />
               </div>
             </div>
@@ -130,6 +180,22 @@ export default function LoginForm() {
               </p>
             )}
 
+            {!isStudent && (
+              <div className="rounded-3xl bg-secondary/80 border border-border p-5 text-sm text-slate-600 space-y-3">
+                <p className="font-bold text-slate-900">Demo credentials for this portal</p>
+                {role === 'faculty' && (
+                  <p>Faculty login: <strong>faculty@vit.edu</strong> / <strong>faculty</strong></p>
+                )}
+                {role === 'admin' && (
+                  <p>Dean login: <strong>dean@vit.edu</strong> / <strong>dean</strong></p>
+                )}
+                {role === 'tpo' && (
+                  <p>TPO login: <strong>tpo@vit.edu</strong> / <strong>tpo</strong></p>
+                )}
+                <p className="text-xs text-slate-500">Use the selected portal to login with the matching credentials above.</p>
+              </div>
+            )}
+
             <button 
               type="submit" disabled={loading}
               className="w-full bg-foreground hover:opacity-90 text-background font-black py-4 rounded-2xl shadow-2xl flex items-center justify-center gap-3 group transition-all text-sm uppercase tracking-[0.15em]"
@@ -138,7 +204,7 @@ export default function LoginForm() {
                 <Loader2 className="animate-spin" size={22} />
               ) : (
                 <>
-                  Sign In to {role} Portal
+                  Sign In to {portalName} Portal
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </>
               )}

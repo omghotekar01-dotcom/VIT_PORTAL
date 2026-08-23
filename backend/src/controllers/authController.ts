@@ -1,10 +1,41 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
 import { User } from '../models/User';
 import { Student } from '../models/Student';
+import { demoStudents, demoUsers } from '../mockData';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_fallback_secret_key_123';
+
+const isDbConnected = () => mongoose.connection.readyState === 1;
+
+const findDemoStudentByEmail = (email: string) =>
+  demoStudents.find((student) => student.email.toLowerCase() === email.toLowerCase());
+
+const findDemoUserByEmail = (email: string) =>
+  demoUsers.find((user) => user.email.toLowerCase() === email.toLowerCase());
+
+const validatePassword = async (
+  inputPassword: string,
+  storedPassword: string | undefined,
+  fallbackPlain?: string
+) => {
+  if (!storedPassword) {
+    return false;
+  }
+
+  const isBcryptHash = storedPassword.startsWith('$2a$') || storedPassword.startsWith('$2b$') || storedPassword.startsWith('$2y$');
+  if (isBcryptHash) {
+    return bcrypt.compare(inputPassword, storedPassword);
+  }
+
+  if (fallbackPlain !== undefined) {
+    return Promise.resolve(inputPassword === fallbackPlain);
+  }
+
+  return false;
+};
 
 export const signup = async (req: Request, res: Response) => {
   try {
@@ -45,17 +76,28 @@ export const signup = async (req: Request, res: Response) => {
       }
     });
   } catch (error) {
-    res.status(500).json({ message: 'Something went wrong', error });
+    console.error('Signup error:', error);
+    res.status(500).json({ message: 'Something went wrong', error: String(error) });
   }
 };
 
 export const login = async (req: Request, res: Response) => {
   try {
     const { email, password, role } = req.body;
+    const emailClean = String(email || '').trim().toLowerCase();
+    const passwordClean = String(password || '').trim();
+    console.log('Login attempt:', { email: emailClean, role });
+    const dbConnected = isDbConnected();
 
-    // If role is student, check Student collection (email + PRN as password)
+    // If role is student, check Student collection or fallback demo students
     if (role === 'student') {
-      const student = await Student.findOne({ email });
+      let student;
+      if (dbConnected) {
+        student = await Student.findOne({ email: emailClean });
+      } else {
+        student = findDemoStudentByEmail(emailClean);
+      }
+
       if (!student) {
         return res.status(404).json({ message: 'Student not found. Contact your admin.' });
       }
@@ -64,7 +106,8 @@ export const login = async (req: Request, res: Response) => {
         return res.status(403).json({ message: `Your account is ${student.status}. Contact administration.` });
       }
 
-      const isPasswordCorrect = await bcrypt.compare(password, student.password);
+      const isPasswordCorrect = await validatePassword(passwordClean, student.password, student.prn);
+
       if (!isPasswordCorrect) {
         return res.status(400).json({ message: 'Invalid credentials. Use your PRN number as password.' });
       }
@@ -92,8 +135,16 @@ export const login = async (req: Request, res: Response) => {
       });
     }
 
-    // For other roles (admin, faculty, tpo), check User collection
-    const user = await User.findOne({ email });
+    // For other roles (admin, faculty, tpo), check User collection first, then fallback to demo users
+    let user;
+    if (dbConnected) {
+      user = await User.findOne({ email: emailClean });
+    }
+
+    if (!user) {
+      user = findDemoUserByEmail(emailClean);
+    }
+
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -102,7 +153,8 @@ export const login = async (req: Request, res: Response) => {
       return res.status(403).json({ message: `This account does not have ${role} access.` });
     }
 
-    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    const isPasswordCorrect = await validatePassword(passwordClean, user.password, user.password);
+
     if (!isPasswordCorrect) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
@@ -123,6 +175,7 @@ export const login = async (req: Request, res: Response) => {
       }
     });
   } catch (error) {
-    res.status(500).json({ message: 'Something went wrong', error });
+    console.error('Login error:', error);
+    res.status(500).json({ message: 'Something went wrong', error: String(error) });
   }
 };
