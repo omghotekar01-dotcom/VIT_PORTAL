@@ -45,27 +45,27 @@ export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false)
   const [saving, setSaving] = useState(false)
   const [profileData, setProfileData] = useState({
-    firstName: 'OM',
-    middleName: 'NIVRUTTI',
-    lastName: 'GHOTEKAR',
+    firstName: 'Demo',
+    middleName: '',
+    lastName: 'Student',
     gender: 'Male',
-    officialEmail: 'om.1251030180@vit.edu',
-    personalEmail: 'om.ghotekar@gmail.com',
-    mobile: '+91 70580 97707',
-    alternateMobile: '-',
+    officialEmail: 'student01@example.test',
+    personalEmail: 'demo.personal@example.test',
+    mobile: '0000000001',
+    alternateMobile: '',
     nationality: 'India Indian',
     domicile: 'Maharashtra',
-    religion: 'Hindu',
-    bloodGroup: 'AB Positive',
-    category: 'OBC',
-    caste: 'Kunbi',
-    birthPlace: 'Sinnar, Nashik',
-    nativePlace: 'Pune, Maharashtra',
-    aadhaar: 'XXXX-XXXX-1234',
-    pan: 'ABCDE1234F',
-    passport: 'P1234567',
-    voterId: 'XYZ1234567',
-    drivingLicense: 'MH-15-2022-1234567',
+    religion: 'Not provided',
+    bloodGroup: 'Not provided',
+    category: 'Not provided',
+    caste: 'Not provided',
+    birthPlace: 'Not provided',
+    nativePlace: 'Pune',
+    aadhaar: 'Not provided',
+    pan: 'Not provided',
+    passport: 'Not provided',
+    voterId: 'Not provided',
+    drivingLicense: 'Not provided',
     photo: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=512&h=512&auto=format&fit=crop',
     signature: ''
   })
@@ -124,7 +124,7 @@ export default function ProfilePage() {
               <p className="text-white/80 font-bold text-lg max-w-2xl">B.Tech in Artificial Intelligence & Machine Learning</p>
               <div className="flex flex-wrap gap-4 pt-2">
                  <span className="text-white/60 text-xs font-bold flex items-center gap-1.5"><MapPin size={14} /> {profileData.nativePlace}</span>
-                 <span className="text-white/60 text-xs font-bold flex items-center gap-1.5"><BookOpen size={14} /> PRN: 1251030180</span>
+                 <span className="text-white/60 text-xs font-bold flex items-center gap-1.5"><BookOpen size={14} /> PRN: 9900000001</span>
                  <span className="text-white/60 text-xs font-bold flex items-center gap-1.5"><Settings size={14} /> Semester V</span>
               </div>
            </div>
