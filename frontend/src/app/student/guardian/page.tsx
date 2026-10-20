@@ -61,7 +61,7 @@ export default function GuardianPage() {
               </div>
               <div>
                 <p className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Institutional Email</p>
-                <p className="text-sm font-bold text-foreground">meena.kulkarni@vit.edu</p>
+                <p className="text-sm font-bold text-foreground">guardian-support@example.test</p>
               </div>
             </div>
             <div className="flex items-center gap-4 p-4 rounded-2xl bg-secondary/30 border border-border/50">

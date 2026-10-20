@@ -9,16 +9,16 @@ import { GraduationCap, Lock, Mail, ArrowRight, Loader2, Hash, AlertCircle } fro
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'
 
 const demoStudents = [
-  { email: 'nupur.1251030483@vit.edu', prn: '1251030483', name: 'Nupur Dharmesh Agrawal' },
-  { email: 'om.1251030402@vit.edu', prn: '1251030402', name: 'Om Manish Patil' },
-  { email: 'om.1251030180@vit.edu', prn: '1251030180', name: 'Om Nivrutti Ghotekar' },
-  { email: 'nandkishor.1251030142@vit.edu', prn: '1251030142', name: 'Nandkishor Shantiling Pachbhai' }
+  { email: 'student01@example.test', prn: '9900000001', name: 'Demo Student One' },
+  { email: 'student02@example.test', prn: '9900000002', name: 'Demo Student Two' },
+  { email: 'student03@example.test', prn: '9900000003', name: 'Demo Student Three' },
+  { email: 'student04@example.test', prn: '9900000004', name: 'Demo Student Four' }
 ]
 
 const demoUsers = [
-  { email: 'faculty@vit.edu', password: 'faculty', role: 'faculty', name: 'Faculty Demo User' },
-  { email: 'dean@vit.edu', password: 'dean', role: 'admin', name: 'Dean Demo User' },
-  { email: 'tpo@vit.edu', password: 'tpo', role: 'tpo', name: 'TPO Demo User' }
+  { email: 'faculty@example.test', password: 'faculty', role: 'faculty', name: 'Demo Faculty' },
+  { email: 'admin@example.test', password: 'dean', role: 'admin', name: 'Demo Administrator' },
+  { email: 'placement@example.test', password: 'tpo', role: 'tpo', name: 'Demo Placement Officer' }
 ]
 
 export default function LoginForm() {
@@ -148,7 +148,7 @@ export default function LoginForm() {
                 <input 
                   type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
                   className="w-full bg-secondary border border-transparent rounded-2xl py-4 pl-16 pr-6 text-foreground placeholder:text-muted-foreground focus:outline-none focus:bg-background focus:border-primary/20 focus:ring-4 focus:ring-primary/5 transition-all text-base font-bold shadow-sm"
-                  placeholder={isStudent ? 'name@vit.edu' : role === 'admin' ? 'dean@vit.edu' : role === 'faculty' ? 'faculty@vit.edu' : 'tpo@vit.edu'}
+                  placeholder={isStudent ? 'student01@example.test' : role === 'admin' ? 'admin@example.test' : role === 'faculty' ? 'faculty@example.test' : 'placement@example.test'}
                 />
               </div>
             </div>
@@ -184,13 +184,13 @@ export default function LoginForm() {
               <div className="rounded-3xl bg-secondary/80 border border-border p-5 text-sm text-slate-600 space-y-3">
                 <p className="font-bold text-slate-900">Demo credentials for this portal</p>
                 {role === 'faculty' && (
-                  <p>Faculty login: <strong>faculty@vit.edu</strong> / <strong>faculty</strong></p>
+                  <p>Faculty login: <strong>faculty@example.test</strong> / <strong>faculty</strong></p>
                 )}
                 {role === 'admin' && (
-                  <p>Dean login: <strong>dean@vit.edu</strong> / <strong>dean</strong></p>
+                  <p>Dean login: <strong>admin@example.test</strong> / <strong>dean</strong></p>
                 )}
                 {role === 'tpo' && (
-                  <p>TPO login: <strong>tpo@vit.edu</strong> / <strong>tpo</strong></p>
+                  <p>TPO login: <strong>placement@example.test</strong> / <strong>tpo</strong></p>
                 )}
                 <p className="text-xs text-slate-500">Use the selected portal to login with the matching credentials above.</p>
               </div>

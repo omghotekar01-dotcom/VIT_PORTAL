@@ -5,6 +5,7 @@ export type DemoStudent = {
   name: string;
   email: string;
   prn: string;
+  password?: string;
   phone: string;
   department: string;
   branch: string;
@@ -30,60 +31,60 @@ export type DemoUser = {
 export const demoStudents: DemoStudent[] = [
   {
     _id: new mongoose.Types.ObjectId().toString(),
-    name: 'Nupur Dharmesh Agrawal',
-    email: 'nupur.1251030483@vit.edu',
-    prn: '1251030483',
-    phone: '7499671070',
+    name: 'Demo Student One',
+    email: 'student01@example.test',
+    prn: '9900000001',
+    phone: '0000000001',
     department: 'Computer Engineering',
     branch: 'CE',
     year: 'TY',
     division: 'A',
-    rollNumber: '1030439',
+    rollNumber: '0000001',
     semester: 6,
     admissionYear: 2021,
     status: 'active'
   },
   {
     _id: new mongoose.Types.ObjectId().toString(),
-    name: 'Om Manish Patil',
-    email: 'om.1251030402@vit.edu',
-    prn: '1251030402',
-    phone: '9373458251',
+    name: 'Demo Student Two',
+    email: 'student02@example.test',
+    prn: '9900000002',
+    phone: '0000000002',
     department: 'Computer Engineering',
     branch: 'CE',
     year: 'TY',
     division: 'A',
-    rollNumber: '1030440',
+    rollNumber: '0000002',
     semester: 6,
     admissionYear: 2021,
     status: 'active'
   },
   {
     _id: new mongoose.Types.ObjectId().toString(),
-    name: 'Om Nivrutti Ghotekar',
-    email: 'om.1251030180@vit.edu',
-    prn: '1251030180',
-    phone: '7058097707',
+    name: 'Demo Student Three',
+    email: 'student03@example.test',
+    prn: '9900000003',
+    phone: '0000000003',
     department: 'Computer Engineering',
     branch: 'CE',
     year: 'TY',
     division: 'A',
-    rollNumber: '1030441',
+    rollNumber: '0000003',
     semester: 6,
     admissionYear: 2021,
     status: 'active'
   },
   {
     _id: new mongoose.Types.ObjectId().toString(),
-    name: 'Nandkishor Shantiling Pachbhai',
-    email: 'nandkishor.1251030142@vit.edu',
-    prn: '1251030142',
-    phone: '9209510963',
+    name: 'Demo Student Four',
+    email: 'student04@example.test',
+    prn: '9900000004',
+    phone: '0000000004',
     department: 'Computer Engineering',
     branch: 'CE',
     year: 'TY',
     division: 'A',
-    rollNumber: '1030442',
+    rollNumber: '0000004',
     semester: 6,
     admissionYear: 2021,
     status: 'active'
@@ -93,24 +94,24 @@ export const demoStudents: DemoStudent[] = [
 export const demoUsers: DemoUser[] = [
   {
     _id: new mongoose.Types.ObjectId().toString(),
-    name: 'diifff liek shtreya das',
-    email: 'faculty@vit.edu',
+    name: 'Demo Faculty',
+    email: 'faculty@example.test',
     password: 'faculty',
     role: 'faculty',
     department: 'Computer Engineering'
   },
   {
     _id: new mongoose.Types.ObjectId().toString(),
-    name: 'Dean Demo User',
-    email: 'dean@vit.edu',
+    name: 'Demo Administrator',
+    email: 'admin@example.test',
     password: 'dean',
     role: 'admin',
     department: 'Academic Affairs'
   },
   {
     _id: new mongoose.Types.ObjectId().toString(),
-    name: 'TPO Demo User',
-    email: 'tpo@vit.edu',
+    name: 'Demo Placement Officer',
+    email: 'placement@example.test',
     password: 'tpo',
     role: 'tpo',
     department: 'Placement'

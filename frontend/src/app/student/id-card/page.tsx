@@ -52,14 +52,14 @@ export default function VirtualIDCard() {
   }
 
   const student = {
-    name: 'Om Ghotekar',
-    prn: '1251030180',
+    name: 'Demo Student One',
+    prn: '9900000001',
     branch: 'Computer Engineering',
     batch: '2022-2026',
-    validUntil: 'June 2026',
+    validUntil: 'Demo only',
     bloodGroup: 'O+',
-    emergency: '+91 98765 43210',
-    address: 'Bibwewadi, Pune - 411037',
+    emergency: '0000000000',
+    address: 'Sample address, Pune',
     photo: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=512&h=512&auto=format&fit=crop'
   }
 
@@ -71,9 +71,9 @@ export default function VirtualIDCard() {
             animate={{ opacity: 1, x: 0 }}
         >
           <h1 className="text-5xl font-black text-slate-800 tracking-tight uppercase flex items-center gap-4">
-            Next-Gen ID <CreditCard className="text-primary" size={32} />
+            Student ID Preview <CreditCard className="text-primary" size={32} />
           </h1>
-          <p className="text-slate-500 font-medium text-lg">Your encrypted digital identity with holographic security.</p>
+          <p className="text-slate-500 font-medium text-lg">Fictional sample card for UI testing — not an official student ID.</p>
         </motion.div>
         
         <motion.div 

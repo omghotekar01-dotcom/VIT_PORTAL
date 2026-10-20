@@ -20,32 +20,32 @@ type DemoStudent = {
 
 const students: DemoStudent[] = [
   {
-    name: 'Nupur Dharmesh Agrawal',
-    phone: '7499671070',
-    prn: '1251030483',
-    rollNumber: '1030439',
-    email: 'nupur.1251030483@vit.edu'
+    name: 'Demo Student One',
+    phone: '0000000001',
+    prn: '9900000001',
+    rollNumber: '0000001',
+    email: 'student01@example.test'
   },
   {
-    name: 'Om Manish Patil',
-    phone: '9373458251',
-    prn: '1251030402',
-    rollNumber: '1030440',
-    email: 'om.1251030402@vit.edu'
+    name: 'Demo Student Two',
+    phone: '0000000002',
+    prn: '9900000002',
+    rollNumber: '0000002',
+    email: 'student02@example.test'
   },
   {
-    name: 'Om Nivrutti Ghotekar',
-    phone: '7058097707',
-    prn: '1251030180',
-    rollNumber: '1030441',
-    email: 'om.1251030180@vit.edu'
+    name: 'Demo Student Three',
+    phone: '0000000003',
+    prn: '9900000003',
+    rollNumber: '0000003',
+    email: 'student03@example.test'
   },
   {
-    name: 'Nandkishor Shantiling Pachbhai',
-    phone: '9209510963',
-    prn: '1251030142',
-    rollNumber: '1030442',
-    email: 'nandkishor.1251030142@vit.edu'
+    name: 'Demo Student Four',
+    phone: '0000000004',
+    prn: '9900000004',
+    rollNumber: '0000004',
+    email: 'student04@example.test'
   }
 ];
 
@@ -55,8 +55,8 @@ async function seed() {
     console.log('Connected to MongoDB for seeding');
 
     // Create or update faculty demo user to match the default demo login credentials
-    const facultyEmail = 'faculty@vit.edu';
-    const facultyName = 'diifff liek shtreya das';
+    const facultyEmail = 'faculty@example.test';
+    const facultyName = 'Demo Faculty';
     const facultyPassword = await bcrypt.hash('faculty', 10);
 
     await User.findOneAndUpdate(
@@ -72,7 +72,7 @@ async function seed() {
     );
     console.log('Faculty demo user created/updated:', facultyName);
 
-    const deanEmail = 'dean@vit.edu';
+    const deanEmail = 'admin@example.test';
     const deanName = 'Dean Demo User';
     const deanPassword = await bcrypt.hash('dean', 10);
 
@@ -89,7 +89,7 @@ async function seed() {
     );
     console.log('Dean demo user created/updated:', deanName);
 
-    const tpoEmail = 'tpo@vit.edu';
+    const tpoEmail = 'placement@example.test';
     const tpoName = 'TPO Demo User';
     const tpoPassword = await bcrypt.hash('tpo', 10);
 

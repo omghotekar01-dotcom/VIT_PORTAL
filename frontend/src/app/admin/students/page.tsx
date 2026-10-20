@@ -31,12 +31,12 @@ const emptyForm: StudentForm = {
 
 // Mock student data for UI demonstration
 const mockStudents = [
-  { _id: '1', prn: '21104032', name: 'Om Ghotekar', email: 'om.ghotekar21@vit.edu', department: 'Computer Engineering', branch: 'CE', year: 'TY', division: 'A', rollNumber: '32', semester: 5, admissionYear: 2021, status: 'active', gender: 'Male' },
-  { _id: '2', prn: '21104015', name: 'Aarav Sharma', email: 'aarav.sharma21@vit.edu', department: 'Computer Engineering', branch: 'CE', year: 'TY', division: 'A', rollNumber: '15', semester: 5, admissionYear: 2021, status: 'active', gender: 'Male' },
-  { _id: '3', prn: '21105008', name: 'Priya Patel', email: 'priya.patel21@vit.edu', department: 'Information Technology', branch: 'IT', year: 'TY', division: 'B', rollNumber: '08', semester: 5, admissionYear: 2021, status: 'active', gender: 'Female' },
-  { _id: '4', prn: '22104045', name: 'Rohan Deshmukh', email: 'rohan.deshmukh22@vit.edu', department: 'Computer Engineering', branch: 'CE', year: 'SY', division: 'B', rollNumber: '45', semester: 3, admissionYear: 2022, status: 'active', gender: 'Male' },
-  { _id: '5', prn: '22106012', name: 'Sneha Kulkarni', email: 'sneha.kulkarni22@vit.edu', department: 'Mechanical Engineering', branch: 'ME', year: 'SY', division: 'A', rollNumber: '12', semester: 3, admissionYear: 2022, status: 'inactive', gender: 'Female' },
-  { _id: '6', prn: '23104003', name: 'Vikram Singh', email: 'vikram.singh23@vit.edu', department: 'Computer Engineering', branch: 'CE', year: 'FY', division: 'C', rollNumber: '03', semester: 1, admissionYear: 2023, status: 'active', gender: 'Male' },
+  { _id: '1', prn: '9900000011', name: 'Demo Student 1', email: 'adminstudent01@example.test', department: 'Computer Engineering', branch: 'CE', year: 'TY', division: 'A', rollNumber: '32', semester: 5, admissionYear: 2021, status: 'active', gender: 'Male' },
+  { _id: '2', prn: '9900000012', name: 'Demo Student 2', email: 'adminstudent02@example.test', department: 'Computer Engineering', branch: 'CE', year: 'TY', division: 'A', rollNumber: '15', semester: 5, admissionYear: 2021, status: 'active', gender: 'Male' },
+  { _id: '3', prn: '9900000013', name: 'Demo Student 3', email: 'adminstudent03@example.test', department: 'Information Technology', branch: 'IT', year: 'TY', division: 'B', rollNumber: '08', semester: 5, admissionYear: 2021, status: 'active', gender: 'Female' },
+  { _id: '4', prn: '9900000014', name: 'Demo Student 4', email: 'adminstudent04@example.test', department: 'Computer Engineering', branch: 'CE', year: 'SY', division: 'B', rollNumber: '45', semester: 3, admissionYear: 2022, status: 'active', gender: 'Male' },
+  { _id: '5', prn: '9900000015', name: 'Demo Student 5', email: 'adminstudent05@example.test', department: 'Mechanical Engineering', branch: 'ME', year: 'SY', division: 'A', rollNumber: '12', semester: 3, admissionYear: 2022, status: 'inactive', gender: 'Female' },
+  { _id: '6', prn: '9900000016', name: 'Demo Student 6', email: 'adminstudent06@example.test', department: 'Computer Engineering', branch: 'CE', year: 'FY', division: 'C', rollNumber: '03', semester: 1, admissionYear: 2023, status: 'active', gender: 'Male' },
 ]
 
 export default function AdminStudentsPage() {
@@ -295,7 +295,7 @@ export default function AdminStudentsPage() {
                   <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-2 block">School Email *</label>
                   <input value={form.email} onChange={e => setForm({...form, email: e.target.value})}
                     className="w-full bg-secondary border border-border rounded-xl py-3 px-4 text-sm font-bold text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
-                    placeholder="e.g., om.ghotekar21@vit.edu" />
+                    placeholder="e.g., student01@example.test" />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
@@ -385,7 +385,7 @@ export default function AdminStudentsPage() {
                 </p>
                 <textarea value={bulkText} onChange={e => setBulkText(e.target.value)} rows={8}
                   className="w-full bg-secondary border border-border rounded-xl py-3 px-4 text-sm font-mono text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 resize-none"
-                  placeholder={`21104032, Om Ghotekar, om.ghotekar21@vit.edu, Computer Engineering, CE, TY, A, 32, 5\n21104015, Aarav Sharma, aarav.sharma21@vit.edu, Computer Engineering, CE, TY, A, 15, 5`} />
+                  placeholder={`9900000011, Demo Student 1, adminstudent01@example.test, Computer Engineering, CE, TY, A, 32, 5\n9900000012, Demo Student 2, adminstudent02@example.test, Computer Engineering, CE, TY, A, 15, 5`} />
               </div>
               <div className="p-8 border-t border-border flex justify-end gap-3">
                 <button onClick={() => setShowBulkModal(false)} className="px-6 py-3 rounded-xl bg-secondary text-foreground font-bold text-sm border border-border">Cancel</button>
