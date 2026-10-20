@@ -5,6 +5,7 @@ export type DemoStudent = {
   name: string;
   email: string;
   prn: string;
+  password?: string;
   phone: string;
   department: string;
   branch: string;
