@@ -145,7 +145,7 @@ export default function AdmissionPage() {
             <div className="space-y-4">
               <div className="p-4 rounded-2xl bg-background border border-border">
                 <p className="text-[10px] uppercase font-black text-muted-foreground tracking-widest mb-1">Email</p>
-                <p className="text-sm font-bold text-foreground">admission@vit.edu</p>
+                <p className="text-sm font-bold text-foreground">admissions@example.test</p>
               </div>
               <div className="p-4 rounded-2xl bg-background border border-border">
                 <p className="text-[10px] uppercase font-black text-muted-foreground tracking-widest mb-1">Phone</p>
