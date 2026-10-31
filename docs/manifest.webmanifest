@@ -1,0 +1,12 @@
+{
+  "name": "VIT D Portal — AIML Division D",
+  "short_name": "VIT D Portal",
+  "description": "Student-made timetable and notices for AIML Division D",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0c1730",
+  "theme_color": "#0c1730",
+  "icons": [{ "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}
